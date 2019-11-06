@@ -15,7 +15,8 @@ namespace CitasClientes.Services
     {
         private readonly List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Osvaldo", LastName = "Aguero", Username = "osv_ag", Password = "osv_ag" }
+            new User { Id = 1, FirstName = "Osvaldo", LastName = "Aguero", Username = "admin", Password = "admin",Role = Role.Admin },
+            new User { Id = 2, FirstName = "User", LastName = "User_LastName", Username = "user", Password = "user", Role = Role.User }
         };
 
         private readonly AppSettings _appSettings;
@@ -38,7 +39,8 @@ namespace CitasClientes.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

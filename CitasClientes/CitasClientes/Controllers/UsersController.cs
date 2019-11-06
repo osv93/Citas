@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using CitasClientes.Services;
 using CitasClientes.Model;
+using CitasClientes.Entities;
 
 namespace CitasClientes.Controllers
 {
@@ -29,6 +30,7 @@ namespace CitasClientes.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {

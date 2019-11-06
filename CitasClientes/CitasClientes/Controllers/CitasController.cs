@@ -3,6 +3,7 @@ using CitasClientes.Model;
 using CitasClientes.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using CitasClientes.Entities;
 
 namespace CitasClientes.Controllers
 {
@@ -18,6 +19,7 @@ namespace CitasClientes.Controllers
             citaRepository = _citaRepository;
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IEnumerable<Cita> GetCitas()
         {
@@ -29,7 +31,7 @@ namespace CitasClientes.Controllers
         [HttpPost]
         public void AddCita(Cita cita)
         {
-            citaRepository.AddCita(cita);
+           citaRepository.AddCita(cita);
         }
 
         [HttpPut("{citaID}")]
