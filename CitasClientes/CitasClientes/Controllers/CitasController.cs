@@ -31,5 +31,11 @@ namespace CitasClientes.Controllers
         {
             citaRepository.AddCita(cita);
         }
+
+        [HttpPut("{citaID}")]
+        public void CancelCita(int citaID)
+        {
+            citaRepository.CancelCita(citaID);
+        }
     }
 }

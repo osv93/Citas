@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CitasClientes.DA;
 using CitasClientes.Model;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,19 @@ namespace CitasClientes.Repository
         {
             context.Entry(cita).State = EntityState.Added;
             context.SaveChanges();
+        }
+
+        public void CancelCita(int citaID)
+        {
+            var cita = context.Citas.FirstOrDefault(item => item.CitaID == citaID);
+            if (cita != null)
+            {
+                context.Citas.Attach(cita);
+
+                cita.Activa = false;
+                context.Entry(cita).Property(x => x.Activa).IsModified = true;
+                context.SaveChanges();
+            }
         }
 
         public IEnumerable<Cita> GetCitas()

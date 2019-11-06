@@ -16,6 +16,8 @@ namespace CitasClientes.Model
         [Required]
         public TipoCita TipoCita { get; set; }
 
+        public bool Activa { get; set; }
+
         [Required]
         public DateTime FechaCita { get; set; }
     }

@@ -39,6 +39,7 @@ namespace CitasClientes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PacienteID = table.Column<string>(nullable: false),
                     TipoCitaID = table.Column<int>(nullable: false),
+                    Activa = table.Column<bool>(nullable: false, defaultValue: true),
                     FechaCita = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

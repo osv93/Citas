@@ -26,6 +26,11 @@ namespace CitasClientes.DA
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Cita>()
+            .Property(b => b.Activa)
+            .HasDefaultValue(1);
+
             modelBuilder.Entity<TipoCita>().HasData(
                 new TipoCita { TipoCitaID = 1, TipoCitaNombre = "Medicina General" },
                 new TipoCita { TipoCitaID = 2, TipoCitaNombre = "Odontología" },
