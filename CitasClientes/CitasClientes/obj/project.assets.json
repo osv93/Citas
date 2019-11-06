@@ -5093,11 +5093,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\1\\CitasClientes\\CitasClientes\\CitasClientes.csproj",
+      "projectUniqueName": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\Citas\\CitasClientes\\CitasClientes\\CitasClientes.csproj",
       "projectName": "CitasClientes",
-      "projectPath": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\1\\CitasClientes\\CitasClientes\\CitasClientes.csproj",
+      "projectPath": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\Citas\\CitasClientes\\CitasClientes\\CitasClientes.csproj",
       "packagesPath": "C:\\Users\\Luis Osvaldo Aguero\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\1\\CitasClientes\\CitasClientes\\obj\\",
+      "outputPath": "C:\\Users\\Luis Osvaldo Aguero\\Documents\\Citas\\CitasClientes\\CitasClientes\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Luis Osvaldo Aguero\\AppData\\Roaming\\NuGet\\NuGet.Config",

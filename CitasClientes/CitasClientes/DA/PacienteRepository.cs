@@ -9,7 +9,6 @@ namespace CitasClientes.DA
 {
     public class PacienteRepository : IPaciente
     {
-
         private readonly Context context;
 
         public PacienteRepository(Context context)

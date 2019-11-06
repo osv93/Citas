@@ -30,9 +30,10 @@ namespace CitasClientes.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PacienteID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("TipoCitaID")
+                    b.Property<int>("TipoCitaID")
                         .HasColumnType("int");
 
                     b.HasKey("CitaID");
@@ -50,7 +51,8 @@ namespace CitasClientes.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PacienteFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("PacienteID");
 
@@ -82,9 +84,7 @@ namespace CitasClientes.Migrations
             modelBuilder.Entity("CitasClientes.Model.TipoCita", b =>
                 {
                     b.Property<int>("TipoCitaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("TipoCitaNombre")
                         .HasColumnType("nvarchar(max)");
@@ -120,11 +120,15 @@ namespace CitasClientes.Migrations
                 {
                     b.HasOne("CitasClientes.Model.Paciente", "Paciente")
                         .WithMany()
-                        .HasForeignKey("PacienteID");
+                        .HasForeignKey("PacienteID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CitasClientes.Model.TipoCita", "TipoCita")
                         .WithMany()
-                        .HasForeignKey("TipoCitaID");
+                        .HasForeignKey("TipoCitaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

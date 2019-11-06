@@ -1,5 +1,6 @@
 ﻿using CitasClientes.DA.Interfaces;
 using CitasClientes.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CitasClientes.DA
 
         public void AddCita(Cita cita)
         {
-            context.Add(cita);
+            context.Entry(cita).State = EntityState.Added;
             context.SaveChanges();
         }
 

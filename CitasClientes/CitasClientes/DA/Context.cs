@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CitasClientes.Model;
-using Microsoft.Extensions.Configuration;
 
 namespace CitasClientes.DA
 {
@@ -16,11 +11,6 @@ namespace CitasClientes.DA
         //public CitaRepositoryContext()
         //{ }
 
-        //public SchoolContext() : base("SchoolDB")
-        //{
-        //    Database.SetInitializer(new SchoolDBInitializer());
-        //}
-
         public DbSet<Cita> Citas { get; set; }
         public DbSet<TipoCita> TiposCitas { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
@@ -29,10 +19,12 @@ namespace CitasClientes.DA
         {
             //optionsBuilder.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase"));
             //optionsBuilder.UseSqlServer("Server=PF13GPM9;Database=Shop;Trusted_Connection=True;");
+            
+            if (optionsBuilder.IsConfigured)
+            {
+                return;
+            }
             optionsBuilder.UseSqlServer(@"Data Source=PF13GPM9\SQLEXPRESS;Initial Catalog=Hospital;Trusted_Connection=True;");
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

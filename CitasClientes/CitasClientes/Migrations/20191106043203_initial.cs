@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CitasClientes.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace CitasClientes.Migrations
                 columns: table => new
                 {
                     PacienteID = table.Column<string>(nullable: false),
-                    PacienteFullName = table.Column<string>(nullable: true)
+                    PacienteFullName = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -23,8 +23,7 @@ namespace CitasClientes.Migrations
                 name: "TiposCitas",
                 columns: table => new
                 {
-                    TipoCitaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoCitaID = table.Column<int>(nullable: false),
                     TipoCitaNombre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -38,8 +37,8 @@ namespace CitasClientes.Migrations
                 {
                     CitaID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PacienteID = table.Column<string>(nullable: true),
-                    TipoCitaID = table.Column<int>(nullable: true),
+                    PacienteID = table.Column<string>(nullable: false),
+                    TipoCitaID = table.Column<int>(nullable: false),
                     FechaCita = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -50,13 +49,13 @@ namespace CitasClientes.Migrations
                         column: x => x.PacienteID,
                         principalTable: "Pacientes",
                         principalColumn: "PacienteID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Citas_TiposCitas_TipoCitaID",
                         column: x => x.TipoCitaID,
                         principalTable: "TiposCitas",
                         principalColumn: "TipoCitaID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
