@@ -6,10 +6,10 @@ namespace CitasClientes.DA
     public class Context : DbContext
     {
 
-        //public CitaRepositoryContext(DbContextOptions<CitaRepositoryContext> options): base(options)
-        //{ }
-        //public CitaRepositoryContext()
-        //{ }
+        public Context(DbContextOptions<Context> options) : base(options)
+        { }
+        public Context()
+        { }
 
         public DbSet<Cita> Citas { get; set; }
         public DbSet<TipoCita> TiposCitas { get; set; }
@@ -17,14 +17,11 @@ namespace CitasClientes.DA
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase"));
-            //optionsBuilder.UseSqlServer("Server=PF13GPM9;Database=Shop;Trusted_Connection=True;");
-            
             if (optionsBuilder.IsConfigured)
             {
                 return;
             }
-            optionsBuilder.UseSqlServer(@"Data Source=PF13GPM9\SQLEXPRESS;Initial Catalog=Hospital;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Data Source=PF13GPM9\SQLEXPRESS;Initial Catalog=Hospital;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,14 +1,12 @@
-﻿using CitasClientes.DA.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using CitasClientes.DA;
 using CitasClientes.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CitasClientes.DA
+namespace CitasClientes.Repository
 {
-    public class CitaRepository : ICita
+    public class CitaRepository : ICitaRepository
     {
         private readonly Context context;
 
@@ -26,6 +24,16 @@ namespace CitasClientes.DA
         public IEnumerable<Cita> GetCitas()
         {
             return context.Citas;
+        }
+
+        public IEnumerable<Paciente> GetPacientes()
+        {
+            return context.Pacientes;
+        }
+
+        public IEnumerable<TipoCita> GetTiposCitas()
+        {
+            return context.TiposCitas;
         }
     }
 }
