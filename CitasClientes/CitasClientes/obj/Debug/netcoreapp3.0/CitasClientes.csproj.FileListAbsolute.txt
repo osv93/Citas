@@ -78,3 +78,4 @@ C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Deb
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.csproj.CopyComplete
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.pdb
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.csprojAssemblyReference.cache

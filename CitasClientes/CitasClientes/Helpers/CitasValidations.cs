@@ -22,9 +22,27 @@ namespace CitasClientes.Helpers
             return sePuedeCancelarLaCita;
         }
 
+        private bool ValidaAgregarMasDeUnaCitaMismoDia(IEnumerable<Cita> citas, DateTime fechaProximaCita)
+        {
+            bool sePuedeAgregarLaCita = false;
+            Cita citaEncontrada = citas.FirstOrDefault(x => x.FechaCita.Day == fechaProximaCita.Day);
+            if (citaEncontrada == null)
+            {
+                sePuedeAgregarLaCita = true;
+            }
+
+            return sePuedeAgregarLaCita;
+        }
+
         public bool SePuedeCancelarCita(Cita cita)
         {
             bool sePuedeCancelarLaCita = ValidaCancelarCitaAntesDe24Horas(cita);
+            return sePuedeCancelarLaCita;
+        }
+
+        public bool SePuedeAgregarCita(IEnumerable<Cita> citas, DateTime fechaProximaCita)
+        {
+            bool sePuedeCancelarLaCita = ValidaAgregarMasDeUnaCitaMismoDia(citas, fechaProximaCita);
             return sePuedeCancelarLaCita;
         }
 

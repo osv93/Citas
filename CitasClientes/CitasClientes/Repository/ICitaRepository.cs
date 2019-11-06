@@ -8,6 +8,7 @@ namespace CitasClientes.Repository
         public void AddCita(Cita cita);
         public void CancelCita(int citaID);
         public Cita GetCitaById(int citaID);
+        public IEnumerable<Cita> GetCitasByPacienteID(string pacienteID);
         public IEnumerable<Cita> GetCitas();
         public IEnumerable<Paciente> GetPacientes();
         public IEnumerable<TipoCita> GetTiposCitas();

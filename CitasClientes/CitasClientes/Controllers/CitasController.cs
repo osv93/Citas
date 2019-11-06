@@ -31,10 +31,28 @@ namespace CitasClientes.Controllers
             return citas;
         }
 
-        [HttpPost]
-        public void AddCita(Cita cita)
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet]
+        public IEnumerable<Paciente> GetPacientes()
         {
-           citaRepository.AddCita(cita);
+            var pacientes = citaRepository.GetPacientes();
+
+            return pacientes;
+        }
+
+        [HttpPost]
+        public IActionResult AddCita(Cita cita)
+        {
+            IEnumerable<Cita> citas = citaRepository.GetCitasByPacienteID(cita.Paciente.PacienteID);
+            bool sePuedeAgregarLaCita = citaValidacion.SePuedeAgregarCita(citas, cita.FechaCita);
+            if (sePuedeAgregarLaCita)
+            {
+                citaRepository.AddCita(cita);
+                return BadRequest(new { message = "Cita agregada con éxito" });
+            }
+            else {
+                return BadRequest(new { message = "No se puede crear una cita para el mismo día" });
+            }
         }
 
         [HttpPut("{citaID}")]

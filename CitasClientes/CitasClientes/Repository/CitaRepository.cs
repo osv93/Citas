@@ -46,6 +46,11 @@ namespace CitasClientes.Repository
             return context.Citas;
         }
 
+        public IEnumerable<Cita> GetCitasByPacienteID(string pacienteID)
+        {
+            return context.Citas.Where(x=> x.Paciente.PacienteID == pacienteID);
+        }
+
         public IEnumerable<Paciente> GetPacientes()
         {
             return context.Pacientes;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CitasClientes.Model
@@ -11,5 +12,6 @@ namespace CitasClientes.Model
 
         [StringLength(50, MinimumLength = 3)]
         public string PacienteFullName { get; set; }
+
     }
 }
