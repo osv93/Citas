@@ -35,6 +35,12 @@ namespace CitasClientes.Repository
             }
         }
 
+        public Cita GetCitaById(int citaID)
+        {
+            var cita = context.Citas.FirstOrDefault(item => item.CitaID == citaID && item.Activa == true);
+            return cita;
+        }
+
         public IEnumerable<Cita> GetCitas()
         {
             return context.Citas;

@@ -4,6 +4,7 @@ using CitasClientes.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CitasClientes.Entities;
+using CitasClientes.Helpers;
 
 namespace CitasClientes.Controllers
 {
@@ -13,10 +14,12 @@ namespace CitasClientes.Controllers
     public class CitasController : ControllerBase
     {
         private readonly ICitaRepository citaRepository = null;
+        private readonly CitasValidations citaValidacion = null;
 
         public CitasController(ICitaRepository _citaRepository)
         {
             citaRepository = _citaRepository;
+            citaValidacion = new CitasValidations();
         }
 
         [Authorize(Roles = Role.Admin)]
@@ -35,9 +38,23 @@ namespace CitasClientes.Controllers
         }
 
         [HttpPut("{citaID}")]
-        public void CancelCita(int citaID)
+        public IActionResult CancelCita(int citaID)
         {
-            citaRepository.CancelCita(citaID);
+            Cita cita = citaRepository.GetCitaById(citaID);
+            if (cita != null)
+            {
+                bool sePuedeCancelar = citaValidacion.SePuedeCancelarCita(cita);
+                if (sePuedeCancelar)
+                {
+                    citaRepository.CancelCita(citaID);
+                    return BadRequest(new { message = "Cita cancelada con éxito" });
+                }
+            }
+            else {
+                return BadRequest(new { message = "La cita no existe" }); 
+            }
+            
+            return BadRequest(new { message = "Las citas se deben cancelar con mínimo 24 horas de antelación" });
         }
     }
 }
