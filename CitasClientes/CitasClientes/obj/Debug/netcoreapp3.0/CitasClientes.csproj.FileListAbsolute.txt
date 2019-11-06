@@ -43,6 +43,7 @@ C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Deb
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\CitasClientes.runtimeconfig.dev.json
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\CitasClientes.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\CitasClientes.pdb
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.Data.SqlClient.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -50,7 +51,14 @@ C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Deb
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.Identity.Client.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\System.Runtime.Caching.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
@@ -70,3 +78,4 @@ C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Deb
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.csproj.CopyComplete
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.dll
 C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.pdb
+C:\Users\Luis Osvaldo Aguero\Documents\Citas\CitasClientes\CitasClientes\obj\Debug\netcoreapp3.0\CitasClientes.csprojAssemblyReference.cache

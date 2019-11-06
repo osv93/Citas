@@ -2,9 +2,11 @@
 using CitasClientes.Model;
 using CitasClientes.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CitasClientes.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]/[action]")]
     public class CitasController : ControllerBase
