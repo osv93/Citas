@@ -9,13 +9,7 @@ namespace CitasClientes.Controllers
     [Route("[controller]/[action]")]
     public class CitasController : ControllerBase
     {
-        //private readonly ILogger<CitasController> _logger;
         private readonly ICitaRepository citaRepository = null;
-
-        //public CitasController(ILogger<CitasController> logger)
-        //{
-        //    _logger = logger;
-        //}
 
         public CitasController(ICitaRepository _citaRepository)
         {
