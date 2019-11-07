@@ -31,6 +31,14 @@ namespace CitasClientes.Controllers
             return citas;
         }
 
+        [HttpGet("{pacienteID}")]
+        public IEnumerable<Cita> GetCitasByPacienteId(string pacienteID)
+        {
+            var citas = citaRepository.GetCitasByPacienteID(pacienteID);
+
+            return citas;
+        }
+
         [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IEnumerable<Paciente> GetPacientes()
