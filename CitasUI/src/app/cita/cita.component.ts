@@ -9,19 +9,18 @@ export class CitaComponent implements OnInit {
     loading = false;
     citas: Cita[] = [];
     currentUser: User;
-
     displayDialog: boolean;
 
     cita: Cita = {
-        citaID:0,
-        paciente:{pacienteID:"",pacienteFullName:""},
-        tipoCita:{tipoCitaID:0,tipoCitaNombre:""},
-        activa:false, 
+        citaID: 0,
+        paciente: { pacienteID : "", pacienteFullName : ""},
+        tipoCita: { tipoCitaID : 0, tipoCitaNombre : ""},
+        activa: false, 
         fechaCita: new Date()
     };
 
     selectedCar: Cita;
-    newCar: boolean;
+    newCita: boolean;
     cols: any[];
 
     constructor(
@@ -33,11 +32,9 @@ export class CitaComponent implements OnInit {
 
     ngOnInit() {
         this.loading = false;
-        //console.log(this.currentUser)
         this.userService.GetCitasByPacienteId(this.currentUser.id).pipe(first()).subscribe(citas => {
             this.loading = false;
             this.citas = citas;
-            console.log(citas)
         });
 
         this.cols = [
@@ -48,20 +45,20 @@ export class CitaComponent implements OnInit {
     }
 
     showDialogToAdd() {
-        this.newCar = true;
+        this.newCita = true;
         this.cita = {
-            citaID:0,
-            paciente:{pacienteID:"",pacienteFullName:""},
-            tipoCita:{tipoCitaID:0,tipoCitaNombre:""},
-            activa:false, 
-            fechaCita: new Date()
+            citaID : 0,
+            paciente : { pacienteID : "", pacienteFullName : ""},
+            tipoCita : { tipoCitaID : 0, tipoCitaNombre : ""},
+            activa: false, 
+            fechaCita : new Date()
         };
         this.displayDialog = true;
     }
 
     save() {
         let citas = [...this.citas];
-        if (this.newCar)
+        if (this.newCita)
             citas.push(this.cita);
         else
             citas[this.citas.indexOf(this.selectedCar)] = this.cita;
@@ -79,18 +76,18 @@ export class CitaComponent implements OnInit {
     }
 
     onRowSelect(event) {
-        this.newCar = false;
+        this.newCita = false;
         this.cita = this.cloneCar(event.data);
         this.displayDialog = true;
     }
 
     cloneCar(c: Cita): Cita {
         let cita = {
-            citaID:0,
-            paciente:{pacienteID:"",pacienteFullName:""},
-            tipoCita:{tipoCitaID:0,tipoCitaNombre:""},
-            activa:false, 
-            fechaCita: new Date()
+            citaID : 0,
+            paciente : { pacienteID : "", pacienteFullName : ""},
+            tipoCita : { tipoCitaID : 0, tipoCitaNombre : ""},
+            activa : false, 
+            fechaCita : new Date()
         };
         // for (let prop in c) {
         //     console.log(c)
