@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +31,8 @@ import { LoginComponent } from './login';
       BrowserAnimationsModule,
       NgbModule,
       ButtonModule,
-      CalendarModule
+      CalendarModule,
+      DropdownModule
   ],
   declarations: [
       AppComponent,
