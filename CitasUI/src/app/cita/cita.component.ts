@@ -42,7 +42,7 @@ export class CitaComponent implements OnInit {
 
         this.cols = [
             { field: 'citaID', header: 'Id' },
-            { field: 'tipoCita', header: 'Tipo de cita' },
+            { field: 'tipoCita.tipoCitaNombre', header: 'Tipo de cita' },
             { field: 'fechaCita', header: 'Fecha de Cita' }
         ];
     }

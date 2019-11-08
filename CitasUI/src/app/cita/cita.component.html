@@ -31,7 +31,6 @@
         <p-table [columns]="cols" [value]="citas" selectionMode="single" [(selection)]="selectedCar"  [paginator]="true" [rows]="15">
                 <ng-template pTemplate="caption">
                     Lista de citas
-                    <!-- {{citas[0].tipoCita.tipoCitaNombre}} -->
                 </ng-template>
                 <ng-template pTemplate="header" let-columns>
                     <tr>
@@ -45,14 +44,16 @@
                         
                     <tr [pSelectableRow]="rowData">
                         <td *ngFor="let col of columns">
+                            <div *ngIf="col.field === 'tipoCita.tipoCitaNombre';then nested_object_content else normal_content"></div>
+                            <ng-template #nested_object_content>
+                                {{rowData['tipoCita']['tipoCitaNombre']}}                                  
+                            </ng-template>
+                            <ng-template #normal_content>
                                 {{rowData[col.field]}}
+                            </ng-template>
                         </td>
                     </tr>
                 </ng-template>
-
-
-
-
                 <ng-template pTemplate="summary" let-rowData>
                     <div style="text-align:left">
                         <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
