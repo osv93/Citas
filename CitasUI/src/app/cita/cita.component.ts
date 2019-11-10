@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { User, Cita } from '../_models';
-import { UserService, AuthenticationService } from '../_services';
+import { CitaService , AuthenticationService } from '../_services';
 
 @Component({ templateUrl: 'cita.component.html' })
 export class CitaComponent implements OnInit {
@@ -10,6 +10,8 @@ export class CitaComponent implements OnInit {
     citas: Cita[] = [];
     currentUser: User;
     displayDialog: boolean;
+    hayError = false;
+    error = '';
 
     cita: Cita = {
         citaID: 0,
@@ -19,12 +21,12 @@ export class CitaComponent implements OnInit {
         fechaCita: new Date()
     };
 
-    selectedCar: Cita;
+    selectedCita: Cita;
     newCita: boolean;
     cols: any[];
 
     constructor(
-        private userService: UserService,
+        private citaService: CitaService,
         private authenticationService: AuthenticationService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
@@ -32,7 +34,7 @@ export class CitaComponent implements OnInit {
 
     ngOnInit() {
         this.loading = false;
-        this.userService.GetCitasByPacienteId(this.currentUser.id).pipe(first()).subscribe(citas => {
+        this.citaService.GetCitasByPacienteId(this.currentUser.id).pipe(first()).subscribe(citas => {
             this.loading = false;
             this.citas = citas;
         });
@@ -61,7 +63,7 @@ export class CitaComponent implements OnInit {
         if (this.newCita)
             citas.push(this.cita);
         else
-            citas[this.citas.indexOf(this.selectedCar)] = this.cita;
+            citas[this.citas.indexOf(this.selectedCita)] = this.cita;
 
         this.citas = citas;
         this.cita = null;
@@ -69,7 +71,7 @@ export class CitaComponent implements OnInit {
     }
 
     delete() {
-        let index = this.citas.indexOf(this.selectedCar);
+        let index = this.citas.indexOf(this.selectedCita);
         this.citas = this.citas.filter((val, i) => i != index);
         this.cita = null;
         this.displayDialog = false;
@@ -94,5 +96,23 @@ export class CitaComponent implements OnInit {
         //     cita[prop] = c[prop];
         // }
         return cita;
+    }
+
+    cancelCita(cita: Cita) {
+        this.selectedCita = cita;
+        console.log("citaSeleccionada: ", this.selectedCita)
+        // let index = this.citas.indexOf(this.selectedCita);
+
+        this.citaService.cancelCita(this.selectedCita.citaID).subscribe(
+            data => {
+                //this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.error = error;
+                this.hayError = true;
+                setTimeout(() => {
+                    this.hayError = false;
+                 }, 3000);
+            });
     }
 }

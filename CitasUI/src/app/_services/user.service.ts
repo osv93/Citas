@@ -16,8 +16,4 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    GetCitasByPacienteId(pacienteID: string) {
-        return this.http.get<Cita[]>(`${environment.apiUrl}/citas/GetCitasByPacienteId/${pacienteID}`);
-    }
-    
 }

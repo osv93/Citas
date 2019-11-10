@@ -11,6 +11,7 @@
                             {{col.header}}
                             <p-sortIcon [field]="col.field"></p-sortIcon>
                         </th>
+                        <th style="width:9em"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -30,6 +31,9 @@
                                     {{rowData[col.field]}}
                             </ng-template>
                         </td>
+                        <td>
+                            <button pButton icon="fa fa-close" label="Cancel" (click)="cancelCita(rowData)"></button>
+                        </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary" let-rowData>
@@ -37,8 +41,11 @@
                         <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
                     </div>
                 </ng-template>    
+                
             </p-table>
-            
+
+            <div *ngIf="hayError" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
             <p-dialog header="Cita Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
                 <div class="ui-g ui-fluid" *ngIf="cita">
                         
@@ -60,11 +67,9 @@
                                 <p-dropdown id="tipoCita" [(ngModel)]="cita.tipoCita" [options]="citas"></p-dropdown>
                             </div>
                     </div>
-
                 </div>
                 <p-footer>
                     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                        <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
                         <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
                     </div>
                 </p-footer>

@@ -73,11 +73,11 @@ namespace CitasClientes.Controllers
                 if (sePuedeCancelar)
                 {
                     citaRepository.CancelCita(citaID);
-                    return BadRequest(new { message = "Cita cancelada con éxito" });
+                    return Ok();
                 }
             }
             else {
-                return BadRequest(new { message = "La cita no existe" }); 
+                return NotFound(new { message = "La cita no existe" }); 
             }
             
             return BadRequest(new { message = "Las citas se deben cancelar con mínimo 24 horas de antelación" });
