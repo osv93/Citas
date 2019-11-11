@@ -69,8 +69,17 @@ export class CitaComponent implements OnInit {
         this.cita.paciente.pacienteID = this.currentUser.id;
         console.log(this.cita)
         this.citaService.AddCita(this.cita).pipe(first()).subscribe(cita => {
-            this.loading = false;
-            console.log(cita);
+
+            // this.loading = false;
+             console.log(cita);
+        },
+        error => {
+            this.error = error;
+            this.hayError = true;
+            this.displayDialog = false;
+            setTimeout(() => {
+                this.hayError = false;
+             }, 3000);
         });
         // let citas = [...this.citas];
         // if (this.newCita)
