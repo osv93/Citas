@@ -13,6 +13,7 @@ namespace CitasClientes.Model
         [Required]
         public Paciente Paciente { get; set; }
 
+        [Required]
         public TipoCita TipoCita { get; set; }
 
         public bool Activa { get; set; }

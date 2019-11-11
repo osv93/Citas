@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { Cita } from '../_models';
+import { Cita, TipoCita } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class CitaService {
@@ -14,13 +14,20 @@ export class CitaService {
         })
       }
 
-    cancelCita(citaID: number) {
-        
-        return this.http.put<any>(`${environment.apiUrl}/citas/CancelCita/${citaID}`, this.httpOptions);
+    CancelCita(citaID: number) {
+      return this.http.put<void>(`${environment.apiUrl}/citas/CancelCita/${citaID}`, this.httpOptions);
     }
 
     GetCitasByPacienteId(pacienteID: string) {
-        return this.http.get<Cita[]>(`${environment.apiUrl}/citas/GetCitasByPacienteId/${pacienteID}`);
+      return this.http.get<Cita[]>(`${environment.apiUrl}/citas/GetCitasByPacienteId/${pacienteID}`);
+    }
+
+    GetTiposCitas() {
+      return this.http.get<TipoCita[]>(`${environment.apiUrl}/citas/GetTiposCitas`);
     }
     
+    AddCita(cita: Cita) {
+      console.log("CITACTA : ", cita)
+      return this.http.post<Cita>(`${environment.apiUrl}/citas/AddCita/`, cita);
+    }
 }

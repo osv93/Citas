@@ -10,7 +10,6 @@ namespace CitasClientes.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string PacienteID { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
         public string PacienteFullName { get; set; }
 
     }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { User, Cita } from '../_models';
+import { User, Cita, TipoCita } from '../_models';
 import { CitaService , AuthenticationService } from '../_services';
 
 @Component({ templateUrl: 'cita.component.html' })
 export class CitaComponent implements OnInit {
     loading = false;
     citas: Cita[] = [];
+    tiposCitas: TipoCita[] = [];
     currentUser: User;
     displayDialog: boolean;
     hayError = false;
@@ -37,6 +38,12 @@ export class CitaComponent implements OnInit {
         this.citaService.GetCitasByPacienteId(this.currentUser.id).pipe(first()).subscribe(citas => {
             this.loading = false;
             this.citas = citas;
+            console.log(citas)
+        });
+
+        this.citaService.GetTiposCitas().pipe(first()).subscribe(tiposCitas => {
+            this.loading = false;
+            this.tiposCitas = tiposCitas;
         });
 
         this.cols = [
@@ -59,15 +66,21 @@ export class CitaComponent implements OnInit {
     }
 
     save() {
-        let citas = [...this.citas];
-        if (this.newCita)
-            citas.push(this.cita);
-        else
-            citas[this.citas.indexOf(this.selectedCita)] = this.cita;
+        this.cita.paciente.pacienteID = this.currentUser.id;
+        console.log(this.cita)
+        this.citaService.AddCita(this.cita).pipe(first()).subscribe(cita => {
+            this.loading = false;
+            console.log(cita);
+        });
+        // let citas = [...this.citas];
+        // if (this.newCita)
+        //     citas.push(this.cita);
+        // else
+        //     citas[this.citas.indexOf(this.selectedCita)] = this.cita;
 
-        this.citas = citas;
-        this.cita = null;
-        this.displayDialog = false;
+        // this.citas = citas;
+        // this.cita = null;
+        // this.displayDialog = false;
     }
 
     delete() {
@@ -103,7 +116,7 @@ export class CitaComponent implements OnInit {
         console.log("citaSeleccionada: ", this.selectedCita)
         // let index = this.citas.indexOf(this.selectedCita);
 
-        this.citaService.cancelCita(this.selectedCita.citaID).subscribe(
+        this.citaService.CancelCita(this.selectedCita.citaID).subscribe(
             data => {
                 //this.router.navigate([this.returnUrl]);
             },

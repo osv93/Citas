@@ -31,6 +31,14 @@ namespace CitasClientes.Controllers
             return citas;
         }
 
+        [HttpGet]
+        public IEnumerable<TipoCita> GetTiposCitas()
+        {
+            var tiposCitas = citaRepository.GetTiposCitas();
+
+            return tiposCitas;
+        }
+
         [HttpGet("{pacienteID}")]
         public IEnumerable<Cita> GetCitasByPacienteId(string pacienteID)
         {
@@ -49,7 +57,7 @@ namespace CitasClientes.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCita(Cita cita)
+        public IActionResult AddCita([FromBody]Cita cita)
         {
             IEnumerable<Cita> citas = citaRepository.GetCitasByPacienteID(cita.Paciente.PacienteID);
             bool sePuedeAgregarLaCita = citaValidacion.SePuedeAgregarCita(citas, cita.FechaCita);

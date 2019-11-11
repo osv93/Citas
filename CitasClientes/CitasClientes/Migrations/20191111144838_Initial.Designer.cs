@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitasClientes.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191106181846_Initial")]
+    [Migration("20191111144838_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

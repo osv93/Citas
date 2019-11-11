@@ -48,7 +48,7 @@ namespace CitasClientes.Repository
 
         public IEnumerable<Cita> GetCitasByPacienteID(string pacienteID)
         {
-            return context.Citas.Include(Paciente => Paciente.TipoCita)
+            return context.Citas.Include(TipoCita => TipoCita.TipoCita).Include(Paciente=> Paciente.Paciente)
                                 .Where(x => x.Paciente.PacienteID == pacienteID)
                                 .ToList();
         }
