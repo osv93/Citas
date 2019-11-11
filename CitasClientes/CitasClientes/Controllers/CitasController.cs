@@ -64,7 +64,7 @@ namespace CitasClientes.Controllers
             if (sePuedeAgregarLaCita)
             {
                 citaRepository.AddCita(cita);
-                return BadRequest(new { message = "Cita agregada con éxito" });
+                return Ok();
             }
             else {
                 return BadRequest(new { message = "No se puede crear una cita para el mismo día" });
