@@ -3,7 +3,7 @@ using CitasClientes.Model;
 using System;
 using Xunit;
 
-namespace XUnitTestProject1
+namespace CitasUnitTests.Helpers_UnitTests
 {
     public class CitasValidations_CancelarCita_Tests
     {
