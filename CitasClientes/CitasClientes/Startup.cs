@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CitasClientes.Contratos;
 using CitasClientes.DA;
 using CitasClientes.Helpers;
 using CitasClientes.Repository;
@@ -56,13 +57,14 @@ namespace CitasClientes
                     ValidateAudience = false
                 };
             });
-
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICitaRepository, CitaRepository>();
             services.AddCors();
             services.AddDbContext<Context>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionDatabase")));
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +75,7 @@ namespace CitasClientes
                 IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
-
+            app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
 
             app.UseRouting();

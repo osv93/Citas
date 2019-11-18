@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using CitasClientes.Model;
-using CitasClientes.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CitasClientes.Entities;
 using CitasClientes.Helpers;
+using CitasClientes.Contratos;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System;
+using Microsoft.Extensions.Logging;
 
 namespace CitasClientes.Controllers
 {
@@ -13,82 +17,136 @@ namespace CitasClientes.Controllers
     [Route("[controller]/[action]")]
     public class CitasController : ControllerBase
     {
-        private readonly ICitaRepository citaRepository = null;
+
+        private IRepositoryWrapper _repoWrapper;
         private readonly CitasValidations citaValidacion = null;
 
-        public CitasController(ICitaRepository _citaRepository)
+        private readonly ILogger<CitasController> _logger;
+
+        public CitasController(IRepositoryWrapper repoWrapper,
+                               ILogger<CitasController> logger)
         {
-            citaRepository = _citaRepository;
+            _repoWrapper = repoWrapper;
+            _logger = logger;
             citaValidacion = new CitasValidations();
         }
 
         [Authorize(Roles = Role.Admin)]
         [HttpGet]
-        public IEnumerable<Cita> GetCitas()
+        public async Task<IActionResult> GetCitas()
         {
-            var citas = citaRepository.GetCitas();
+            _logger.LogInformation("Fetching all the Students from the storage");
 
-            return citas;
+            IEnumerable<Cita> citas = await _repoWrapper.CitaRepo.GetAll();
+            return Ok(citas);
+            throw new Exception("Exception while fetching all the Citas from the storage.");
         }
 
         [HttpGet]
-        public IEnumerable<TipoCita> GetTiposCitas()
+        public async Task<IActionResult> GetTiposCitas()
         {
-            var tiposCitas = citaRepository.GetTiposCitas();
 
-            return tiposCitas;
+            IEnumerable<TipoCita> tiposCitas = await _repoWrapper.TipoCitaRepo.GetAll();
+            return Ok(tiposCitas);
+            throw new Exception("Exception while fetching all the TiposCitas from the storage.");
         }
 
         [HttpGet("{pacienteID}")]
-        public IEnumerable<Cita> GetCitasByPacienteId(string pacienteID)
+        public async Task<IActionResult> GetCitasByPacienteId(string pacienteID)
         {
-            var citas = citaRepository.GetCitasByPacienteID(pacienteID);
 
-            return citas;
-        }
+            IEnumerable<Cita> citas =
+                await _repoWrapper.CitaRepo.FindByCondition(predicate: x => x.Paciente.PacienteID == pacienteID && x.Activa == true,
+                                                            orderBy: null,
+                                                            take: null,
+                                                            include: source => source.Include(a => a.TipoCita).Include(a => a.Paciente));
 
-        [Authorize(Roles = Role.Admin)]
-        [HttpGet]
-        public IEnumerable<Paciente> GetPacientes()
-        {
-            var pacientes = citaRepository.GetPacientes();
-
-            return pacientes;
+            return Ok(citas);
+            throw new Exception("Exception while fetching GetCitasByPacienteId from the storage.");
         }
 
         [HttpPost]
-        public IActionResult AddCita([FromBody]Cita cita)
+        public async Task<IActionResult> AddCita([FromBody]Cita cita)
         {
-            IEnumerable<Cita> citas = citaRepository.GetCitasByPacienteID(cita.Paciente.PacienteID);
+            IEnumerable<Cita> citas =
+                await _repoWrapper.CitaRepo.FindByCondition(predicate: x => x.Paciente.PacienteID == cita.Paciente.PacienteID && x.Activa == true,
+                                                orderBy: null,
+                                                take: null,
+                                                include: source => source.Include(a => a.TipoCita).Include(a => a.Paciente));
+
             bool sePuedeAgregarLaCita = citaValidacion.SePuedeAgregarCita(citas, cita.FechaCita);
             if (sePuedeAgregarLaCita)
             {
-                citaRepository.AddCita(cita);
-                return Ok();
+                await _repoWrapper.CitaRepo.Add(cita);
+                await _repoWrapper.Save();
+                return NoContent();
             }
-            else {
-                return BadRequest(new { message = "No se puede crear una cita para el mismo día" });
+            else
+            {
+                throw new Exception("No se puede crear una cita para el mismo día.");
             }
         }
 
         [HttpPut("{citaID}")]
-        public IActionResult CancelCita(int citaID)
+        public async Task<IActionResult> CancelCita(int citaID)
         {
-            Cita cita = citaRepository.GetCitaById(citaID);
+            Cita cita = await _repoWrapper.CitaRepo.GetById(citaID);
             if (cita != null)
             {
                 bool sePuedeCancelar = citaValidacion.SePuedeCancelarCita(cita);
                 if (sePuedeCancelar)
                 {
-                    citaRepository.CancelCita(citaID);
+                    cita.Activa = false;
+                    _repoWrapper.CitaRepo.Update(cita);
+                    await _repoWrapper.Save();
                     return Ok();
                 }
+                else
+                {
+                    throw new Exception("Las citas se deben cancelar con mínimo 24 horas de antelación.");
+                }
             }
-            else {
-                return NotFound(new { message = "La cita no existe" }); 
+            else
+            {
+                throw new Exception("La cita no existe.");
             }
-            
-            return BadRequest(new { message = "Las citas se deben cancelar con mínimo 24 horas de antelación" });
         }
+        //[HttpPut("{id}")]
+        //public IActionResult UpdateOwner(Guid id, [FromBody]OwnerForUpdateDto owner)
+        //{
+        //    try
+        //    {
+        //        if (owner == null)
+        //        {
+        //            _logger.LogError("Owner object sent from client is null.");
+        //            return BadRequest("Owner object is null");
+        //        }
+
+        //        if (!ModelState.IsValid)
+        //        {
+        //            _logger.LogError("Invalid owner object sent from client.");
+        //            return BadRequest("Invalid model object");
+        //        }
+
+        //        var ownerEntity = _repository.Owner.GetOwnerById(id);
+        //        if (ownerEntity == null)
+        //        {
+        //            _logger.LogError($"Owner with id: {id}, hasn't been found in db.");
+        //            return NotFound();
+        //        }
+
+        //        _mapper.Map(owner, ownerEntity);
+
+        //        _repository.Owner.UpdateOwner(ownerEntity);
+        //        _repository.Save();
+
+        //        return NoContent();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Something went wrong inside UpdateOwner action: {ex.Message}");
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
     }
 }
